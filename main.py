@@ -8,7 +8,7 @@ app = FastAPI()
 
 @app.post("/analyze-pr")
 def analyze_pr(request: dict):
-    task = analyze_pr_task.delay(request["repo_url"], request["pr_number"])
+    task = analyze_pr_task.delay(request["pr_url"])
     return {"task_id": task.id}
 
 @app.get("/status/{task_id}")
