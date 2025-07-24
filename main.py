@@ -1,9 +1,7 @@
 # main.py
-from fastapi import FastAPI, HTTPException
-from celery.result import AsyncResult
+from fastapi import FastAPI
 
-from tasks import analyze_pr_task
-from cache import get_task_result
+from celery_app import analyze_pr_task
 
 app = FastAPI()
 
