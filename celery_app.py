@@ -12,11 +12,12 @@ celery_app = Celery(
 
 @celery_app.task(bind=True)
 def analyze_pr_task(self, pr_url: str):
-    repo_url, pr_number = pr_url.split("pull/")
-    diff = fetch_pr_diff(repo_url, int(pr_number))
+    repo_url, pr_number = pr_url.split("/pull/")
+    diff, pr_title, pr_description = fetch_pr_diff(repo_url, int(pr_number))
     res = {
-        "repo_url": repo_url,
-        "pr_number": pr_number,
+        "pr_url": pr_url,
+        "pr_title": pr_title,
+        "pr_description": pr_description,
         "diff": diff,
         "status": "success",
         "message": "PR analyzed successfully"
