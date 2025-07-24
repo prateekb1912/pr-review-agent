@@ -22,7 +22,7 @@ def analyze_pr_task(self, pr_url: str):
         "diff": diff,
         "status": "success",
         "message": "PR analyzed successfully",
-        "review": review_result.raw
+        "review": review_result
     }
 
     return res
