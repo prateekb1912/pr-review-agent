@@ -6,8 +6,8 @@ from agent.tools.github import fetch_pr_diff
 
 celery_app = Celery(
     "review_agent",
-    broker=os.getenv("CELERY_BROKER_URL"),
-    backend=os.getenv("CELERY_RESULT_BACKEND")
+    broker=os.getenv("REDIS_URL"),
+    backend=os.getenv("REDIS_URL")
 )
 
 @celery_app.task(bind=True)

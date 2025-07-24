@@ -12,4 +12,4 @@ def run_code_review(diff, pr_title, pr_description):
         verbose=True,
     )
     result = crew.kickoff()
-    return result
+    return result.raw
