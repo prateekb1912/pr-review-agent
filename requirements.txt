@@ -3,3 +3,7 @@ fastapi
 uvicorn
 redis
 requests
+crewai
+langchain
+langchain-openai
+python-dotenv
