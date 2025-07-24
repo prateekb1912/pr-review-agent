@@ -10,11 +10,12 @@ load_dotenv()
 
 # Get Redis URL from environment variables
 REDIS_URL = os.getenv("REDIS_URL") or "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = os.getenv("REDIS_URL") or "redis://localhost:6379/0"
 
 celery_app = Celery(
     "review_agent",
     broker=REDIS_URL,
-    backend=REDIS_URL,
+    backend=CELERY_RESULT_BACKEND,
 )
 
 # Configure Celery

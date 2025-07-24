@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI, HTTPException
 from celery.result import AsyncResult
-from .celery_app import analyze_pr_task
+from .celery_app import analyze_pr_task, celery_app
 import logging
 
 app = FastAPI()
@@ -17,7 +17,7 @@ def analyze_pr(request: dict):
 @app.get("/status/{task_id}")
 def get_status(task_id: str):
     try:
-        result = AsyncResult(task_id)
+        result = AsyncResult(task_id, app=celery_app)
         logger.info(f"Status for task {task_id}: {result.status}")
         return {
             "task_id": task_id, 
@@ -31,7 +31,7 @@ def get_status(task_id: str):
 @app.get("/results/{task_id}")
 def get_results(task_id: str):
     try:
-        result = AsyncResult(task_id)
+        result = AsyncResult(task_id, app=celery_app)
         if result.status == "SUCCESS":
             logger.info(f"Results for task {task_id}: {result.result}")
             return result.result
