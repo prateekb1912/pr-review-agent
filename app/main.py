@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI
 from celery.result import AsyncResult
-from celery_app import analyze_pr_task
+from .celery_app import analyze_pr_task
 import logging
 
 app = FastAPI()
